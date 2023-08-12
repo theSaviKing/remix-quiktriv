@@ -35,11 +35,16 @@ export default function App() {
                     <h1 className="navbar-start text-4xl">
                         <Logo />
                     </h1>
-                    <nav className="navbar-end"></nav>
+                    <nav className="navbar-end flex gap-2">
+                        <button className="btn btn-primary">New Quiz</button>
+                    </nav>
                 </header>
                 <main className="grow flex">
                     <div id="sidebar" className="h-full p-8 hidden"></div>
-                    <Outlet />
+                    {/* div#sidebar to be implemented */}
+                    <div className="flex flex-col justify-center items-center w-full h-full p-8">
+                        <Outlet />
+                    </div>
                 </main>
                 <ScrollRestoration />
                 <Scripts />

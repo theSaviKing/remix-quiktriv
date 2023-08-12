@@ -10,7 +10,7 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
     return (
-        <div className="flex flex-col justify-center items-center w-full h-full">
+        <div>
             <h1 className="text-6xl flex flex-col text-center">
                 <span className="uppercase font-black text-2xl tracking-widest">
                     Welcome to
@@ -18,11 +18,12 @@ export default function Index() {
                 <span className="text-6xl font-extralight">quikTriv</span>
             </h1>
             <HR />
-            <div>
+            <div className="w-4/5 max-w-xl mx-auto text-center">
                 <b>quikTriv</b> is a lightweight quiz maker app that allows you
                 to create an easily playable quiz that you can share with
-                friends. Try quikTriv now! Click {"{ Make a new quiz }"} in the
-                top-right corner.
+                friends. Try quikTriv now! Click{" "}
+                <p className="btn no-animation btn-xs btn-primary">New Quiz</p>{" "}
+                in the top-right corner.
             </div>
         </div>
     );

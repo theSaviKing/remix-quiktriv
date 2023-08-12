@@ -20,7 +20,6 @@ model Answer {
 model Question {
   id              Int      @id @default(autoincrement())
   text            String
-  type            String
   answers         Answer[]
   correctAnswerId Int
   quiz            Quiz     @relation(fields: [quizId], references: [id])
