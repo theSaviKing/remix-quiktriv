@@ -18,6 +18,12 @@ export default function Index() {
                 <span className="text-6xl font-extralight">quikTriv</span>
             </h1>
             <HR />
+            <div>
+                <b>quikTriv</b> is a lightweight quiz maker app that allows you
+                to create an easily playable quiz that you can share with
+                friends. Try quikTriv now! Click {"{ Make a new quiz }"} in the
+                top-right corner.
+            </div>
         </div>
     );
 }
