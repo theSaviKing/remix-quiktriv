@@ -10,20 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Answer {
-  id         Int      @id @default(autoincrement())
-  text       String
-  question   Question @relation(fields: [questionId], references: [id])
-  questionId Int
-}
-
 model Question {
-  id              Int      @id @default(autoincrement())
-  text            String
-  answers         Answer[]
-  correctAnswerId Int
-  quiz            Quiz     @relation(fields: [quizId], references: [id])
-  quizId          Int
+  id      Int    @id @default(autoincrement())
+  text    String
+  answers String
+  quiz    Quiz   @relation(fields: [quizId], references: [id])
+  quizId  Int
 }
 
 model Quiz {
@@ -32,4 +24,7 @@ model Quiz {
   description String
   category    String
   questions   Question[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
 }

@@ -7,3 +7,4 @@ yarn.lock
 /build
 /public/build
 .env
+.DS_Store

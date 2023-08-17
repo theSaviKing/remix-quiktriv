@@ -1,3 +1,5 @@
+const { defineRoutes } = require("@remix-run/dev/dist/config/routes");
+
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
     ignoredRouteFiles: ["**/.*"],
