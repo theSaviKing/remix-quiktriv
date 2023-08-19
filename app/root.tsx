@@ -80,7 +80,10 @@ export default function App() {
                         </div>
                     </div>
                     <div className="navbar-end flex gap-2">
-                        <button className="btn btn-primary">
+                        <button
+                            className="btn btn-primary target:animate-pulse duration-1000"
+                            id="new-quiz"
+                        >
                             New Quiz{" "}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

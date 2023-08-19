@@ -6,26 +6,29 @@ import HR from "~/components/HR";
 import Quiz from "./Quiz";
 
 export async function loader({ params }: LoaderArgs) {
+    let quiz = await prisma.quiz.findUniqueOrThrow({
+        where: {
+            id: Number(params.id),
+        },
+        include: {
+            questions: {
+                include: {
+                    answers: true,
+                },
+            },
+        },
+    });
     return json({
-        quiz: await prisma.quiz.findUniqueOrThrow({
-            where: {
-                id: Number(params.id),
-            },
-        }),
-        questions: await prisma.question.findMany({
-            where: {
-                quizId: Number(params.id),
-            },
-        }),
+        quiz: quiz,
     });
 }
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
-    return [{ title: `Quiz: ${data?.quiz.title}` }];
+    return [{ title: `Quiz: ${data?.quiz.title} | quikTriv quiz maker` }];
 };
 
 export default function QuizDisplay() {
-    const { quiz, questions } = useLoaderData<typeof loader>();
+    const { quiz } = useLoaderData<typeof loader>();
     return (
         <>
             <div className="text-center">
@@ -36,7 +39,7 @@ export default function QuizDisplay() {
                 </p>
             </div>
             <HR />
-            <Quiz quiz={quiz} questions={questions} />
+            <Quiz quiz={quiz} />
         </>
     );
 }

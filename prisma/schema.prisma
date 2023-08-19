@@ -10,12 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Answer {
+  id         Int      @id @default(autoincrement())
+  text       String
+  correct    Boolean
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+}
+
 model Question {
-  id      Int    @id @default(autoincrement())
+  id      Int      @id @default(autoincrement())
   text    String
-  answers String
-  quiz    Quiz   @relation(fields: [quizId], references: [id])
+  quiz    Quiz     @relation(fields: [quizId], references: [id])
   quizId  Int
+  answers Answer[]
 }
 
 model Quiz {
