@@ -1,5 +1,9 @@
 import { LoaderArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import {
+    isRouteErrorResponse,
+    useLoaderData,
+    useRouteError,
+} from "@remix-run/react";
 import { prisma } from "~/utils/db.server";
 import type { V2_MetaFunction } from "@remix-run/node";
 import HR from "~/components/HR";
@@ -24,7 +28,14 @@ export async function loader({ params }: LoaderArgs) {
 }
 
 export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
-    return [{ title: `Quiz: ${data?.quiz.title} | quikTriv quiz maker` }];
+    return [
+        {
+            title:
+                (data?.quiz.title == undefined
+                    ? "No quiz found"
+                    : `Quiz: ${data?.quiz.title}`) + ` | quikTriv quiz maker`,
+        },
+    ];
 };
 
 export default function QuizDisplay() {
