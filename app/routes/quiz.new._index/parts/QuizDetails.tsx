@@ -1,4 +1,6 @@
-function Details({
+import { useState } from "react";
+
+export default function QuizDetails({
     setPage,
     data,
     setData,
@@ -8,14 +10,14 @@ function Details({
         title: string;
         description: string;
         category: string;
-        questions: never[];
+        questions: { id: number; title: string; answers: string[] }[];
     };
     setData: React.Dispatch<
         React.SetStateAction<{
             title: string;
             description: string;
             category: string;
-            questions: never[];
+            questions: { id: number; title: string; answers: string[] }[];
         }>
     >;
 }) {
@@ -24,7 +26,7 @@ function Details({
             <p className="uppercase text-secondary font-bold text-xl text-center">
                 Enter quiz details
             </p>
-            <label htmlFor="title" className="label">
+            <label htmlFor="title" className="label relative">
                 Title
             </label>
             <input
@@ -40,7 +42,7 @@ function Details({
                 }
                 value={data.title}
             />
-            <label htmlFor="description" className="label">
+            <label htmlFor="description" className="label relative">
                 Description
             </label>
             <textarea
@@ -57,7 +59,7 @@ function Details({
                 }
                 value={data.description}
             ></textarea>
-            <label htmlFor="category" className="label">
+            <label htmlFor="category" className="label relative">
                 Category
             </label>
             <select
@@ -86,82 +88,4 @@ function Details({
             </button>
         </>
     );
-}
-
-function Questions({
-    setPage,
-    data,
-    setData,
-}: {
-    setPage: React.Dispatch<React.SetStateAction<number>>;
-    data: {
-        title: string;
-        description: string;
-        category: string;
-        questions: never[];
-    };
-    setData: React.Dispatch<
-        React.SetStateAction<{
-            title: string;
-            description: string;
-            category: string;
-            questions: never[];
-        }>
-    >;
-}) {
-    return (
-        <>
-            <p className="uppercase text-secondary font-bold text-xl text-center">
-                Add quiz questions
-            </p>
-            <div className="grid grid-cols-2 gap-2 mt-4 w-max self-end">
-                <button
-                    type="button"
-                    className="btn btn-secondary btn-outline"
-                    onClick={() => setPage((page) => page - 1)}
-                >
-                    Back to Quiz Details
-                </button>
-                <button type="submit" className="btn btn-primary">
-                    Create new quiz
-                </button>
-            </div>
-        </>
-    );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-export default function FormBody({
-    page,
-    setPage,
-    data,
-    setData,
-}: {
-    page: number;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
-    data: {
-        title: string;
-        description: string;
-        category: string;
-        questions: never[];
-    };
-    setData: React.Dispatch<
-        React.SetStateAction<{
-            title: string;
-            description: string;
-            category: string;
-            questions: never[];
-        }>
-    >;
-}) {
-    switch (page) {
-        case 0:
-            return <Details setPage={setPage} data={data} setData={setData} />;
-        case 1:
-            return (
-                <Questions setPage={setPage} data={data} setData={setData} />
-            );
-    }
 }
