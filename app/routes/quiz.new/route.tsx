@@ -2,6 +2,7 @@ import { ActionArgs, V2_MetaFunction, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { useState } from "react";
 import { prisma } from "~/utils/db.server";
+import { Details, Questions } from "./parts";
 
 export const meta: V2_MetaFunction = () => {
     return [
@@ -17,6 +18,16 @@ export async function action({ request }: ActionArgs) {
 
 export default function NewQuiz() {
     const [page, setPage] = useState(0);
+    let FormBody;
+    switch (page) {
+        case 0:
+            FormBody = <Details />;
+            break;
+        case 1:
+            FormBody = <Questions />;
+        default:
+            FormBody = <Details />;
+    }
     return (
         <>
             <div className="text-center space-y-4">
@@ -25,7 +36,9 @@ export default function NewQuiz() {
                     create a new quiz that you can share with friends!
                 </p>
             </div>
-            <Form method="post" className="w-3/5 relative"></Form>
+            <Form method="post" className="w-3/5 relative">
+                <FormBody />
+            </Form>
         </>
     );
 }
