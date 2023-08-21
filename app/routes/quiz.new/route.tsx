@@ -2,7 +2,7 @@ import { ActionArgs, V2_MetaFunction, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import { useState } from "react";
 import { prisma } from "~/utils/db.server";
-import { Details, Questions } from "./parts";
+import FormBody from "./parts";
 
 export const meta: V2_MetaFunction = () => {
     return [
@@ -11,33 +11,34 @@ export const meta: V2_MetaFunction = () => {
     ];
 };
 
-export async function action({ request }: ActionArgs) {
-    const data = await request.formData();
+function getFormData(data: {}) {
+    console.log(data);
     return redirect("/quiz/all");
 }
 
 export default function NewQuiz() {
     const [page, setPage] = useState(0);
-    let FormBody;
-    switch (page) {
-        case 0:
-            FormBody = <Details />;
-            break;
-        case 1:
-            FormBody = <Questions />;
-        default:
-            FormBody = <Details />;
-    }
+    const [data, setData] = useState({
+        title: "",
+        description: "",
+        category: "choose",
+        questions: [],
+    });
     return (
         <>
-            <div className="text-center space-y-4">
+            <div className="text-center">
                 <h1>New Quiz</h1>
-                <p className="uppercase font-bold">
-                    create a new quiz that you can share with friends!
+                <p className="text-lg mt-6 mx-auto p-4 rounded border border-neutral">
+                    Create a new quiz that you can share with friends!
                 </p>
             </div>
-            <Form method="post" className="w-3/5 relative">
-                <FormBody />
+            <Form className="w-2/5 p-8 rounded border border-primary/50 flex flex-col gap-2">
+                <FormBody
+                    page={page}
+                    setPage={setPage}
+                    data={data}
+                    setData={setData}
+                />
             </Form>
         </>
     );

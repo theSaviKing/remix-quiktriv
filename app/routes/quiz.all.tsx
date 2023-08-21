@@ -13,12 +13,11 @@ export const meta: V2_MetaFunction = () => {
 export const loader = async () => {
     return json({
         quizzes: await prisma.quiz.findMany(),
-        quizCount: await prisma.quiz.count(),
     });
 };
 
 export default function AllQuizzes() {
-    const { quizzes, quizCount } = useLoaderData<typeof loader>();
+    const { quizzes } = useLoaderData<typeof loader>();
     return (
         <>
             <h1>All Quizzes</h1>
@@ -39,7 +38,7 @@ export default function AllQuizzes() {
             <p className="uppercase">
                 Total Quizzes:{" "}
                 <span className="font-black font-mono bg-neutral p-1 rounded">
-                    {quizCount}
+                    {quizzes.length}
                 </span>
             </p>
         </>

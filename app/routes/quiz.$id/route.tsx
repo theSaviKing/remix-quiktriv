@@ -1,9 +1,5 @@
 import { LoaderArgs, json } from "@remix-run/node";
-import {
-    isRouteErrorResponse,
-    useLoaderData,
-    useRouteError,
-} from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { prisma } from "~/utils/db.server";
 import type { V2_MetaFunction } from "@remix-run/node";
 import HR from "~/components/HR";
