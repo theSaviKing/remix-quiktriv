@@ -1,5 +1,6 @@
 import QuizQuestions from "./parts/QuizQuestions";
 import QuizDetails from "./parts/QuizDetails";
+import { NewQuizData } from "./route";
 
 export default function FormBody({
     page,
@@ -9,20 +10,8 @@ export default function FormBody({
 }: {
     page: number;
     setPage: React.Dispatch<React.SetStateAction<number>>;
-    data: {
-        title: string;
-        description: string;
-        category: string;
-        questions: { id: number; title: string; answers: string[] }[];
-    };
-    setData: React.Dispatch<
-        React.SetStateAction<{
-            title: string;
-            description: string;
-            category: string;
-            questions: { id: number; title: string; answers: string[] }[];
-        }>
-    >;
+    data: NewQuizData;
+    setData: React.Dispatch<React.SetStateAction<NewQuizData>>;
 }) {
     switch (page) {
         case 0:

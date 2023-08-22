@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NewQuizData } from "../route";
 
 export default function QuizDetails({
     setPage,
@@ -6,20 +7,8 @@ export default function QuizDetails({
     setData,
 }: {
     setPage: React.Dispatch<React.SetStateAction<number>>;
-    data: {
-        title: string;
-        description: string;
-        category: string;
-        questions: { id: number; title: string; answers: string[] }[];
-    };
-    setData: React.Dispatch<
-        React.SetStateAction<{
-            title: string;
-            description: string;
-            category: string;
-            questions: { id: number; title: string; answers: string[] }[];
-        }>
-    >;
+    data: NewQuizData;
+    setData: React.Dispatch<React.SetStateAction<NewQuizData>>;
 }) {
     return (
         <>

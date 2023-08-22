@@ -4,6 +4,18 @@ import { useState, PropsWithChildren } from "react";
 import { prisma } from "~/utils/db.server";
 import FormBody from "./parts";
 
+export type NewQuizData = {
+    title: string;
+    description: string;
+    category: string;
+    questions: {
+        id: number;
+        title: string;
+        answers: string[];
+        correctAnswer: number;
+    }[];
+};
+
 export const meta: V2_MetaFunction = () => {
     return [
         { title: "Make a new quiz! | quikTriv quiz maker" },
@@ -13,12 +25,7 @@ export const meta: V2_MetaFunction = () => {
 
 export default function NewQuiz(props: PropsWithChildren) {
     const [page, setPage] = useState(0);
-    const [data, setData] = useState<{
-        title: string;
-        description: string;
-        category: string;
-        questions: { id: number; title: string; answers: string[] }[];
-    }>({
+    const [data, setData] = useState<NewQuizData>({
         title: "",
         description: "",
         category: "choose",
