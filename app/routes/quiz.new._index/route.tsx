@@ -31,12 +31,14 @@ export default function NewQuiz(props: PropsWithChildren) {
                     (page == 1 ? "" : "2xl:w-2/5")
                 }
             >
-                <FormBody
-                    page={page}
-                    setPage={setPage}
-                    data={data}
-                    setData={setData}
-                />
+                {status == "typing" && (
+                    <FormBody
+                        page={page}
+                        setPage={setPage}
+                        data={data}
+                        setData={setData}
+                    />
+                )}
             </Form>
         </>
     );

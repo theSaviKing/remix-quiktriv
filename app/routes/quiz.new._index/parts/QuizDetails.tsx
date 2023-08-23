@@ -10,6 +10,7 @@ export default function QuizDetails({
     data: NewQuizData;
     setData: UseStateCallback<NewQuizData>;
 }) {
+    const [error, setError] = useState(false);
     return (
         <>
             <p className="uppercase text-secondary font-bold text-xl text-center">
@@ -68,13 +69,26 @@ export default function QuizDetails({
                 <option value="sports">Sports</option>
                 <option value="music">Music</option>
             </select>
-            <button
-                type="button"
-                className="btn btn-primary mt-4 self-end w-max"
-                onClick={() => setPage((page) => page + 1)}
+            <div
+                className={`tooltip-left tooltip-error self-end before:font-bold mt-4 [--tooltip-tail:8px] ${
+                    error && "tooltip tooltip-open"
+                }`}
+                data-tip="You have empty fields. Please enter all quiz details."
             >
-                Add Quiz Questions
-            </button>
+                <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() =>
+                        data.title == "" ||
+                        data.category == "choose" ||
+                        data.description == ""
+                            ? setError(true)
+                            : setPage((page) => page + 1)
+                    }
+                >
+                    Add Quiz Questions
+                </button>
+            </div>
         </>
     );
 }
