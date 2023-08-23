@@ -81,7 +81,7 @@ export default function App() {
                     </div>
                     <div className="navbar-end flex gap-2">
                         <Link
-                            className="btn btn-primary target:animate-pulse duration-1000"
+                            className="btn btn-primary target:animate-pulse duration-1000 [@keyframes_pulse{50%{opacity:.25;}}]"
                             id="new-quiz"
                             to="/quiz/new"
                         >
