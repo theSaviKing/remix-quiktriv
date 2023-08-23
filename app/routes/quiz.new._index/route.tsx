@@ -39,7 +39,7 @@ export default function NewQuiz(props: PropsWithChildren) {
             <Form
                 className={
                     "w-4/5 p-8 rounded border border-primary/50 flex flex-col gap-2 " +
-                    (page == 1 ? "xl:w-3/5" : "xl:w-2/5")
+                    (page == 1 ? "2xl:w-3/5" : "2xl:w-2/5")
                 }
             >
                 <FormBody
