@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { NewQuizData } from "../route";
+import { NewQuizData, UseStateCallback } from "~/utils/types";
 
 export default function QuizDetails({
     setPage,
     data,
     setData,
 }: {
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+    setPage: UseStateCallback<number>;
     data: NewQuizData;
-    setData: React.Dispatch<React.SetStateAction<NewQuizData>>;
+    setData: UseStateCallback<NewQuizData>;
 }) {
     return (
         <>

@@ -1,6 +1,6 @@
 import QuizQuestions from "./parts/QuizQuestions";
 import QuizDetails from "./parts/QuizDetails";
-import { NewQuizData } from "./route";
+import { NewQuizData, UseStateCallback } from "~/utils/types";
 
 export default function FormBody({
     page,
@@ -9,9 +9,9 @@ export default function FormBody({
     setData,
 }: {
     page: number;
-    setPage: React.Dispatch<React.SetStateAction<number>>;
+    setPage: UseStateCallback<number>;
     data: NewQuizData;
-    setData: React.Dispatch<React.SetStateAction<NewQuizData>>;
+    setData: UseStateCallback<NewQuizData>;
 }) {
     switch (page) {
         case 0:

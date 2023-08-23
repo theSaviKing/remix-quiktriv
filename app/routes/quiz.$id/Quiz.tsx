@@ -1,5 +1,6 @@
 import type { Answer, Prisma, Question, Quiz } from "@prisma/client";
 import React, { useEffect, useMemo, useState } from "react";
+import { UseStateCallback } from "~/utils/types";
 
 function Question({
     question,
@@ -8,7 +9,7 @@ function Question({
 }: {
     question: Prisma.QuestionGetPayload<{ include: { answers: true } }>;
     index: number;
-    setPoints: React.Dispatch<React.SetStateAction<number>>;
+    setPoints: UseStateCallback<number>;
 }) {
     const [answer, setAnswer] = useState(-1);
     function handleClick(clickedAnswer: Answer) {

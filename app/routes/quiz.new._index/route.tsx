@@ -3,18 +3,7 @@ import { Form, Outlet } from "@remix-run/react";
 import { useState, PropsWithChildren } from "react";
 import { prisma } from "~/utils/db.server";
 import FormBody from "./parts";
-
-export type NewQuizData = {
-    title: string;
-    description: string;
-    category: string;
-    questions: {
-        id: number;
-        title: string;
-        answers: string[];
-        correctAnswer: number;
-    }[];
-};
+import { NewQuizData } from "~/utils/types";
 
 export const meta: V2_MetaFunction = () => {
     return [
@@ -39,7 +28,7 @@ export default function NewQuiz(props: PropsWithChildren) {
             <Form
                 className={
                     "w-4/5 p-8 rounded border border-primary/50 flex flex-col gap-2 " +
-                    (page == 1 ? "2xl:w-3/5" : "2xl:w-2/5")
+                    (page == 1 ? "" : "2xl:w-2/5")
                 }
             >
                 <FormBody
