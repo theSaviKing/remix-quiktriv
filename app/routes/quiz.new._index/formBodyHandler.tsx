@@ -1,6 +1,7 @@
-import QuizQuestions from "./parts/QuizQuestions";
-import QuizDetails from "./parts/QuizDetails";
+import QuizQuestions from "./formComponents/QuizQuestions";
+import QuizDetails from "./formComponents/QuizDetails";
 import { NewQuizData, UseStateCallback } from "~/utils/types";
+import QuizPreview from "./formComponents/QuizPreview";
 
 export default function FormBody({
     page,
@@ -26,5 +27,7 @@ export default function FormBody({
                     setData={setData}
                 />
             );
+        case 2:
+            return <QuizPreview data={data} setPage={setPage} />;
     }
 }
