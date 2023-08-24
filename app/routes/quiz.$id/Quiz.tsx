@@ -1,6 +1,6 @@
-import type { Answer, Prisma, Question, Quiz } from "@prisma/client";
-import React, { useEffect, useMemo, useState } from "react";
-import { UseStateCallback } from "~/utils/types";
+import type { Answer, Prisma } from "@prisma/client";
+import React, { useState } from "react";
+import type { UseStateCallback } from "~/utils/types";
 
 function Question({
     question,

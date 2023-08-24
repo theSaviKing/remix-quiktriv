@@ -1,6 +1,7 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
+    Link,
     Links,
     LiveReload,
     Meta,
@@ -8,10 +9,9 @@ import {
     Scripts,
     ScrollRestoration,
 } from "@remix-run/react";
-import tailwindStyles from "~/css/tailwind.css";
-import fonts from "~/css/fonts.css";
 import Logo from "~/components/Logo";
-import { Link } from "@remix-run/react";
+import fonts from "~/css/fonts.css";
+import tailwindStyles from "~/css/tailwind.css";
 
 export const links: LinksFunction = () => [
     ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -71,10 +71,10 @@ export default function App() {
                                 className="menu dropdown-content z-[1] p-2 bg-neutral shadow rounded-box w-48"
                             >
                                 <li>
-                                    <a href="">Sports</a>
+                                    <button>Sports</button>
                                 </li>
                                 <li>
-                                    <a href="">Music</a>
+                                    <button>Music</button>
                                 </li>
                             </ul>
                         </div>

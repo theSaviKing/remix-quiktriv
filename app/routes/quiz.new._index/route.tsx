@@ -1,9 +1,12 @@
-import { ActionArgs, V2_MetaFunction, redirect } from "@remix-run/node";
-import { Form, Outlet } from "@remix-run/react";
-import { useState, PropsWithChildren } from "react";
-import { prisma } from "~/utils/db.server";
+import {
+    redirect,
+    type ActionArgs,
+    type V2_MetaFunction,
+} from "@remix-run/node";
+import { Form, useNavigation } from "@remix-run/react";
+import { useState } from "react";
+import type { NewQuizData } from "~/utils/types";
 import FormBody from "./formBodyHandler";
-import { NewQuizData } from "~/utils/types";
 
 export const meta: V2_MetaFunction = () => {
     return [
@@ -26,9 +29,7 @@ export default function NewQuiz() {
         category: "choose",
         questions: [],
     });
-    const [status, setStatus] = useState<
-        "typing" | "submitting" | "created" | "error"
-    >("typing");
+    const status = useNavigation();
     let totalPages = 3;
     return (
         <>
@@ -48,14 +49,14 @@ export default function NewQuiz() {
                     (page == 1 ? "" : "2xl:w-2/5")
                 }
             >
-                {status == "typing" && (
+                {status.state == "idle" || status.state == "submitting" ? (
                     <FormBody
                         page={page}
                         setPage={setPage}
                         data={data}
                         setData={setData}
                     />
-                )}
+                ) : null}
             </Form>
         </>
     );

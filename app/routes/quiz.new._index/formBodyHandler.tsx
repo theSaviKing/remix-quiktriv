@@ -1,7 +1,7 @@
-import QuizQuestions from "./formComponents/QuizQuestions";
+import type { NewQuizData, UseStateCallback } from "~/utils/types";
 import QuizDetails from "./formComponents/QuizDetails";
-import { NewQuizData, UseStateCallback } from "~/utils/types";
 import QuizPreview from "./formComponents/QuizPreview";
+import QuizQuestions from "./formComponents/QuizQuestions";
 
 export default function FormBody({
     page,

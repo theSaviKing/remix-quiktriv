@@ -1,5 +1,5 @@
 import { useSubmit } from "@remix-run/react";
-import { NewQuizData, UseStateCallback } from "~/utils/types";
+import type { NewQuizData, UseStateCallback } from "~/utils/types";
 
 export default function QuizPreview({
     data,
@@ -8,6 +8,7 @@ export default function QuizPreview({
     data: NewQuizData;
     setPage: UseStateCallback<number>;
 }) {
+    const submit = useSubmit();
     let headerClassName = "uppercase font-black text-accent";
     let Detail = ({ title, body }: { title: string; body: string }) => (
         <div>
@@ -31,6 +32,7 @@ export default function QuizPreview({
             <div className="grid grid-cols-2 mx-auto text-sm text-gray-400">
                 {question.answers.map((answer, aIndex) => (
                     <p
+                        key={aIndex}
                         className={
                             question.correctAnswer == aIndex
                                 ? "text-green-600 font-bold"
@@ -64,7 +66,11 @@ export default function QuizPreview({
                 <div className="flex flex-col gap-6">
                     <p className={headerClassName}>Quiz Questions</p>
                     {data.questions.map((question, qIndex) => (
-                        <Question question={question} index={qIndex + 1} />
+                        <Question
+                            question={question}
+                            index={qIndex + 1}
+                            key={qIndex}
+                        />
                     ))}
                 </div>
             </div>
@@ -89,10 +95,9 @@ export default function QuizPreview({
                     className="btn btn-primary"
                     onClick={() => {
                         console.log(data);
-                        const submit = useSubmit();
                         const formData = new FormData();
                         formData.append("data", JSON.stringify(data));
-                        submit(formData);
+                        submit(formData, { method: "POST" });
                     }}
                 >
                     Create new quiz

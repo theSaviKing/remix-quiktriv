@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NewQuizData, UseStateCallback } from "~/utils/types";
+import type { NewQuizData, UseStateCallback } from "~/utils/types";
 
 export default function QuizDetails({
     setPage,

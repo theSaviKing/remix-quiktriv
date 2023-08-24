@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NewQuizData, UseStateCallback } from "~/utils/types";
+import type { NewQuizData, UseStateCallback } from "~/utils/types";
 
 export default function QuizQuestions({
     setPage,
@@ -294,7 +294,7 @@ export default function QuizQuestions({
                     +
                 </button>
             </div>
-            <div className="grid grid-cols-2 gap-2 mt-4 w-max self-end">
+            <div className="flex justify-between mt-4">
                 <button
                     type="button"
                     className="btn btn-secondary btn-outline"
@@ -304,8 +304,18 @@ export default function QuizQuestions({
                 </button>
                 <button
                     type="button"
-                    className="btn btn-primary"
+                    className={`btn btn-primary disabled:pointer-events-auto disabled:no-animation ${
+                        data.questions.length == 0
+                            ? "tooltip tooltip-secondary before:normal-case"
+                            : ""
+                    }`}
+                    data-tip={
+                        data.questions.length == 0
+                            ? "You need to have at least one question created."
+                            : ""
+                    }
                     onClick={() => setPage((page) => page + 1)}
+                    disabled={data.questions.length == 0}
                 >
                     Preview new quiz
                 </button>
