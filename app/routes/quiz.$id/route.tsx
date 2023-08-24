@@ -6,7 +6,7 @@ import HR from "~/components/HR";
 import Quiz from "./Quiz";
 
 export async function loader({ params }: LoaderArgs) {
-    let quiz = await prisma.quiz.findUniqueOrThrow({
+    let quiz = await prisma.quiz.findUnique({
         where: {
             id: Number(params.id),
         },
@@ -18,6 +18,12 @@ export async function loader({ params }: LoaderArgs) {
             },
         },
     });
+    if (!quiz) {
+        throw new Response(null, {
+            status: 404,
+            statusText: "Could not locate quiz",
+        });
+    }
     return json({
         quiz: quiz,
     });
