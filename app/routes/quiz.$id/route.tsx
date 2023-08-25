@@ -5,6 +5,12 @@ import { prisma } from "~/utils/db.server";
 import Quiz from "./Quiz";
 
 export async function loader({ params }: LoaderArgs) {
+    if (isNaN(Number(params.id))) {
+        throw new Response(null, {
+            status: 404,
+            statusText: "Not a valid Quiz ID",
+        });
+    }
     let quiz = await prisma.quiz.findUnique({
         where: {
             id: Number(params.id),
@@ -20,7 +26,7 @@ export async function loader({ params }: LoaderArgs) {
     if (!quiz) {
         throw new Response(null, {
             status: 404,
-            statusText: "Could not locate quiz",
+            statusText: "Error finding quiz",
         });
     }
     return json({

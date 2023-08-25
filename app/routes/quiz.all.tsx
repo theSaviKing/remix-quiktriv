@@ -12,7 +12,15 @@ export const meta: V2_MetaFunction = () => {
 
 export const loader = async () => {
     return json({
-        quizzes: await prisma.quiz.findMany(),
+        quizzes: await prisma.quiz.findMany({
+            include: {
+                _count: {
+                    select: {
+                        questions: true,
+                    },
+                },
+            },
+        }),
     });
 };
 
@@ -22,7 +30,7 @@ export default function AllQuizzes() {
         <>
             <h1>All Quizzes</h1>
             <div className="grid grid-cols-3 gap-4">
-                {quizzes.map((quiz) => (
+                {quizzes.map((quiz, index) => (
                     <Link
                         className="p-8 bg-base-200 rounded-xl text-center space-y-2"
                         key={quiz.id}
@@ -31,7 +39,18 @@ export default function AllQuizzes() {
                         <p className="text-3xl font-extralight uppercase">
                             {quiz.title}
                         </p>
-                        <p className="text-sm">{quiz.description}</p>
+                        <p className="text-sm line-clamp-2">
+                            {quiz.description}
+                        </p>
+                        <p
+                            className={`font-bold uppercase text-sm ${
+                                index % 2 == 0
+                                    ? "text-secondary"
+                                    : "text-accent"
+                            }`}
+                        >
+                            {quiz._count.questions} questions
+                        </p>
                     </Link>
                 ))}
             </div>

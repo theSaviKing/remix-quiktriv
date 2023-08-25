@@ -1,12 +1,15 @@
 import { useSubmit } from "@remix-run/react";
+import type { Navigation } from "react-router-dom";
 import type { NewQuizData, UseStateCallback } from "~/utils/types";
 
 export default function QuizPreview({
     data,
     setPage,
+    status,
 }: {
     data: NewQuizData;
     setPage: UseStateCallback<number>;
+    status: Navigation;
 }) {
     const submit = useSubmit();
     let headerClassName = "uppercase font-black text-accent";
@@ -100,7 +103,9 @@ export default function QuizPreview({
                         submit(formData, { method: "POST" });
                     }}
                 >
-                    Create new quiz
+                    {status.state == "submitting"
+                        ? "Creating..."
+                        : "Create new quiz"}
                 </button>
             </div>
         </>

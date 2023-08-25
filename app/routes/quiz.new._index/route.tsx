@@ -55,6 +55,7 @@ export default function NewQuiz() {
                         setPage={setPage}
                         data={data}
                         setData={setData}
+                        status={status}
                     />
                 ) : null}
             </Form>
