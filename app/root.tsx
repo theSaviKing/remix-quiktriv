@@ -8,16 +8,49 @@ import {
     Outlet,
     Scripts,
     ScrollRestoration,
+    useRouteError,
 } from "@remix-run/react";
 import Logo from "~/components/Logo";
 import fonts from "~/css/fonts.css";
 import tailwindStyles from "~/css/tailwind.css";
+import ErrorGraphic from "~/components/error404";
 
 export const links: LinksFunction = () => [
     ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
     { rel: "stylesheet", href: tailwindStyles },
     { rel: "stylesheet", href: fonts },
 ];
+
+export function ErrorBoundary() {
+    const error = useRouteError();
+    return (
+        <html>
+            <head>
+                <title>We've got a 404 on our hands...</title>
+                <Meta />
+                <Links />
+            </head>
+            <body className="flex flex-col justify-center items-center w-full h-screen overflow-hidden">
+                <header className="grid grid-cols-2 gap-8 w-full">
+                    <div></div>
+                    <ErrorGraphic
+                        octoLight="fill-primary"
+                        octoDark="fill-primary-focus"
+                        manGearLight="fill-secondary"
+                        manGearDark="fill-secondary-focus"
+                        manGloves="fill-accent-focus"
+                        manShoes="fill-accent"
+                        manBody="fill-base-content"
+                        className="w-48 h-48"
+                    />
+                </header>
+                <ScrollRestoration />
+                <Scripts />
+                <LiveReload />
+            </body>
+        </html>
+    );
+}
 
 export default function App() {
     return (

@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "production") {
     db.$connect();
 }
 
-function shuffle(array: Array<any>) {
+export function shuffle(array: Array<any>) {
     let currentIndex = array.length,
         randomIndex;
 
