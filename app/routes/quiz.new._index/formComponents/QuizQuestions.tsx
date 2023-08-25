@@ -112,7 +112,7 @@ export default function QuizQuestions({
                                             </div>
                                             <div className="flex w-full">
                                                 <textarea
-                                                    className="bg-neutral p-4 border-2 border-neutral focus:outline-none focus:border-accent text-xl font-bold flex justify-center items-center resize-none"
+                                                    className="bg-neutral p-4 border-2 border-neutral focus:outline-none focus:border-accent text-xl font-bold flex justify-center items-center resize-none scrollbar-thin scrollbar-thumb-accent-focus/50"
                                                     value={question.title}
                                                     onChange={(e) => {
                                                         const newQuestions = [

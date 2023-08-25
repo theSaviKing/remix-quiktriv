@@ -13,7 +13,9 @@ import {
 import Logo from "~/components/Logo";
 import fonts from "~/css/fonts.css";
 import tailwindStyles from "~/css/tailwind.css";
-import ErrorGraphic from "~/components/error404";
+import ErrorGraphic from "~/components/ErrorGraphic";
+import ErrorBlob from "./components/ErrorBlob";
+import type { ErrorResponse } from "./utils/types";
 
 export const links: LinksFunction = () => [
     ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -22,7 +24,11 @@ export const links: LinksFunction = () => [
 ];
 
 export function ErrorBoundary() {
-    const error = useRouteError();
+    const error = useRouteError() as ErrorResponse;
+    if (!error.status && !error.statusText) {
+        error.status = 500;
+        error.statusText = "Internal Server Error.";
+    }
     return (
         <html>
             <head>
@@ -31,18 +37,63 @@ export function ErrorBoundary() {
                 <Links />
             </head>
             <body className="flex flex-col justify-center items-center w-full h-screen overflow-hidden">
-                <header className="grid grid-cols-2 gap-8 w-full">
-                    <div></div>
-                    <ErrorGraphic
-                        octoLight="fill-primary"
-                        octoDark="fill-primary-focus"
-                        manGearLight="fill-secondary"
-                        manGearDark="fill-secondary-focus"
-                        manGloves="fill-accent-focus"
-                        manShoes="fill-accent"
-                        manBody="fill-base-content"
-                        className="w-48 h-48"
-                    />
+                <header className="flex flex-col xl:flex-row-reverse gap-24 xl:gap-8 w-full xl:h-full items-center">
+                    <div className="w-1/2 justify-self-end relative h-full flex items-center scale-50 xl:scale-100 -mt-72 xl:mt-0">
+                        <ErrorBlob className="absolute w-[80rem] -top-96 -right-96 -z-10 fill-primary-focus/20" />
+                        <ErrorGraphic
+                            octoLight="fill-primary"
+                            octoDark="fill-primary-focus"
+                            manGearLight="fill-secondary"
+                            manGearDark="fill-secondary-focus"
+                            manGloves="fill-accent-focus"
+                            manShoes="fill-accent"
+                            manBody="fill-base-content"
+                            light="fill-base-content"
+                            className="w-[50rem] mr-16"
+                        />
+                    </div>
+                    <div className="w-1/2 space-y-8 text-center ml-16 z-20">
+                        {error.status && (
+                            <h1 className="text-9xl font-bold">
+                                {error.status}
+                            </h1>
+                        )}
+                        {error.statusText && (
+                            <p className="font-light text-5xl">
+                                {error.statusText}
+                            </p>
+                        )}
+                        {error.data && (
+                            <p className="p-2 px-4 rounded-lg bg-base-200 font-mono">
+                                {error.data}
+                            </p>
+                        )}
+                        <div className="mt-8 space-y-4">
+                            <p className="uppercase text-secondary font-bold">
+                                nav links
+                            </p>
+                            <div className="grid grid-cols-3 gap-2 w-3/5 mx-auto">
+                                <Link
+                                    to="/"
+                                    className="btn btn-primary btn-outline"
+                                >
+                                    Home
+                                </Link>
+                                <Link
+                                    to="/quiz/all"
+                                    className="btn btn-secondary btn-outline"
+                                >
+                                    All Quizzes
+                                </Link>
+                                <Link
+                                    to="/quiz/new"
+                                    className="btn btn-accent btn-outline"
+                                >
+                                    Make a new quiz
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </header>
                 <ScrollRestoration />
                 <Scripts />

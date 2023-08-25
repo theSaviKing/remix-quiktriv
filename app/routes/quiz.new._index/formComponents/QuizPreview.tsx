@@ -100,7 +100,10 @@ export default function QuizPreview({
                         console.log(data);
                         const formData = new FormData();
                         formData.append("data", JSON.stringify(data));
-                        submit(formData, { method: "POST" });
+                        submit(formData, {
+                            method: "POST",
+                            action: "/quiz/new/create",
+                        });
                     }}
                 >
                     {status.state == "submitting"

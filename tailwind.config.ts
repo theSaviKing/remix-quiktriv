@@ -8,10 +8,11 @@ export default {
             fontFamily: {
                 sans: ["'DM Sans'", ...defaultTheme.fontFamily.sans],
                 serif: ["'DM Serif Display'", ...defaultTheme.fontFamily.serif],
+                mono: ["'DM Mono'", ...defaultTheme.fontFamily.mono],
             },
         },
     },
-    plugins: [require("daisyui")],
+    plugins: [require("daisyui"), require("tailwind-scrollbar")],
     daisyui: {
         themes: ["retro", "night"],
         darkTheme: "night",
