@@ -7,28 +7,22 @@ export const action = async ({ request }: ActionArgs) => {
     const data = JSON.parse(
         (await request.formData()).get("data") as string
     ) as NewQuizData;
-    const newQuestions: Prisma.QuestionCreateNestedManyWithoutQuizInput = {
-        create: data.questions.map((question) => {
-            let newAnswers: Prisma.AnswerCreateNestedManyWithoutQuestionInput =
-                {
-                    create: question.answers.map((answer, answerIndex) => {
-                        return {
-                            text: answer,
-                            correct: question.correctAnswer == answerIndex,
-                        };
-                    }),
-                };
-            return {
-                text: question.title,
-            };
-        }),
-    };
     const newQuiz = await prisma.quiz.create({
         data: {
             category: data.category,
             description: data.description,
             title: data.title,
-            questions: newQuestions,
+            questions: {
+                create: data.questions.map((question) => ({
+                    text: question.title,
+                    answers: {
+                        create: question.answers.map((answer, answerIndex) => ({
+                            text: answer,
+                            correct: question.correctAnswer == answerIndex,
+                        })),
+                    },
+                })),
+            },
         },
         include: {
             questions: {
@@ -38,8 +32,13 @@ export const action = async ({ request }: ActionArgs) => {
             },
         },
     });
-    console.log(newQuiz);
-    return redirect("/quiz/all");
+    if (newQuiz) {
+        return redirect(
+            `/quiz/new/success?id=${newQuiz.id}&?title=${newQuiz.title}`
+        );
+    } else {
+        return redirect("/quiz/new/failed");
+    }
 };
 
 export const loader = async () => redirect("/");

@@ -269,25 +269,23 @@ export default function QuizQuestions({
                 <button
                     className="btn btn-secondary btn-circle btn-lg text-4xl mx-auto"
                     onClick={() => {
-                        setData((data) => {
-                            return {
-                                ...data,
-                                questions: [
-                                    ...data.questions,
-                                    {
-                                        id: counter,
-                                        title: `Question ${counter}`,
-                                        answers: [
-                                            "Answer 1",
-                                            "Answer 2",
-                                            "Answer 3",
-                                            "Answer 4",
-                                        ],
-                                        correctAnswer: 0,
-                                    },
-                                ],
-                            };
-                        });
+                        setData((data) => ({
+                            ...data,
+                            questions: [
+                                ...data.questions,
+                                {
+                                    id: counter,
+                                    title: `Question ${counter}`,
+                                    answers: [
+                                        "Answer 1",
+                                        "Answer 2",
+                                        "Answer 3",
+                                        "Answer 4",
+                                    ],
+                                    correctAnswer: 0,
+                                },
+                            ],
+                        }));
                         setCounter((counter) => counter + 1);
                     }}
                 >

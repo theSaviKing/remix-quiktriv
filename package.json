@@ -13,7 +13,7 @@
         "format-code": "npm run prettier:fix & npm run lint:fix"
     },
     "dependencies": {
-        "@prisma/client": "^5.1.1",
+        "@prisma/client": "^5.2.0",
         "@remix-run/css-bundle": "^1.19.1",
         "@remix-run/node": "^1.19.1",
         "@remix-run/react": "^1.19.1",
@@ -33,7 +33,7 @@
         "daisyui": "^3.5.0",
         "eslint": "^8.38.0",
         "eslint-plugin-react-hooks": "^4.6.0",
-        "prisma": "^5.1.1",
+        "prisma": "^5.2.0",
         "tailwind-scrollbar": "^3.0.5",
         "tailwindcss": "^3.3.3",
         "ts-node": "^10.9.1",

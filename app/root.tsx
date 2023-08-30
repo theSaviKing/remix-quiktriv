@@ -32,7 +32,7 @@ export function ErrorBoundary() {
     return (
         <html>
             <head>
-                <title>We've got a 404 on our hands...</title>
+                <title>We've got a {error.status} on our hands...</title>
                 <Meta />
                 <Links />
             </head>

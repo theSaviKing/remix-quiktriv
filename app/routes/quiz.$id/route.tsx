@@ -23,7 +23,7 @@ export async function loader({ params }: LoaderArgs) {
             },
         },
     });
-    if (!quiz) {
+    if (quiz == null) {
         throw new Response(null, {
             status: 404,
             statusText: "Error finding quiz",
@@ -51,7 +51,7 @@ export default function QuizDisplay() {
         <>
             <div className="text-center">
                 <p className="uppercase tracking-[0.25em]">play this quiz</p>
-                <h1>{quiz.title}</h1>
+                <h1 className="normal-case">{quiz.title}</h1>
                 <p className="text-lg mt-6 w-4/5 mx-auto p-4 rounded border border-neutral">
                     {quiz.description}
                 </p>

@@ -26,9 +26,7 @@ export default function QuizDetails({
                 placeholder="The coolest quiz you'll ever take"
                 required
                 onChange={(e) =>
-                    setData((data) => {
-                        return { ...data, title: e.target.value };
-                    })
+                    setData((data) => ({ ...data, title: e.target.value }))
                 }
                 value={data.title}
             />
@@ -43,9 +41,10 @@ export default function QuizDetails({
                 required
                 placeholder="Take this quiz! It's really cool!"
                 onChange={(e) =>
-                    setData((data) => {
-                        return { ...data, description: e.target.value };
-                    })
+                    setData((data) => ({
+                        ...data,
+                        description: e.target.value,
+                    }))
                 }
                 value={data.description}
             ></textarea>
@@ -57,9 +56,7 @@ export default function QuizDetails({
                 className="select select-bordered"
                 required
                 onChange={(e) =>
-                    setData((data) => {
-                        return { ...data, category: e.target.value };
-                    })
+                    setData((data) => ({ ...data, category: e.target.value }))
                 }
                 value={data.category}
             >
